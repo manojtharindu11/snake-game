@@ -1,33 +1,47 @@
 import pygame
+import os
 
 class Snake:
-    def __init__(self, parent_screen):
+    def __init__(self, parent_screen, length):
+        self.SIZE = int(os.getenv("SNAKE_SIZE", 40))
         self.parent_screen = parent_screen
+        self.length = length
         self.block = pygame.image.load("resources/images/block.jpg").convert()
-        self.x = 100
-        self.y = 100
+        self.x = [self.SIZE] * length
+        self.y = [self.SIZE] * length
         self.direction = 'down'
         
     def draw(self):
         self.parent_screen.fill((110, 110, 50))
-        self.parent_screen.blit(self.block, (self.x, self.y))
+        for i in range(self.length):
+            self.parent_screen.blit(self.block, (self.x[i], self.y[i]))
         pygame.display.flip()
         
     def move_left(self):
-        self.x -= 10
-        self.draw()
+        self.direction = "left"
         
     def move_right(self):
-        self.x += 10
-        self.draw()
+        self.direction = "right"
         
     def move_up(self):
-        self.y -= 10
-        self.draw()
+        self.direction = "up"
         
     def move_down(self):
-        self.y += 10
-        self.draw()
+        self.direction = "down"
         
     def walk(self):
-        pass
+        
+        for i in range(self.length - 1, 0, -1):
+            self.x[i] = self.x[i - 1]
+            self.y[i] = self.y[i - 1]
+        
+        if self.direction == "left":
+            self.x[0] -= self.SIZE
+        if self.direction == "right":
+            self.x[0] += self.SIZE
+        if self.direction == "up":
+            self.y[0] -= self.SIZE
+        if self.direction == "down":
+            self.y[0] += self.SIZE
+            
+        self.draw()
