@@ -11,6 +11,11 @@ class Snake:
         self.y = [self.SIZE] * length
         self.direction = 'down'
         
+    def increase_length(self):
+        self.length += 1
+        self.x.append(-1)
+        self.y.append(-1)
+        
     def draw(self):
         self.parent_screen.fill((110, 110, 50))
         for i in range(self.length):
