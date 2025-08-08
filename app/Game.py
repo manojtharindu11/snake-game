@@ -62,7 +62,7 @@ class Game:
         pygame.mixer.music.play()
         
     def render_background(self):
-        bg = pygame.image.load("resouces/images/background.jpg")
+        bg = pygame.image.load("resources/images/background.jpg")
         self.surface.blit(bg, (0, 0))
     
     def show_game_over(self):
