@@ -48,4 +48,8 @@ class Snake(Object):
         if self.direction == "down":
             self.y[0] += self.SIZE
             
+        # Screen wrapping logic
+        self.x[0] %= self.WINDOW_WIDTH
+        self.y[0] %= self.WINDOW_HEIGHT
+            
         self.draw()

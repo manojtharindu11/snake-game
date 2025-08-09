@@ -39,18 +39,7 @@ class Game(Object):
             if self.is_collision(self.snake.x[0], self.snake.y[0], self.snake.x[i], self.snake.y[i]):
                 self.play_sound("crash")
                 raise "Game over"
-            
-        # snake colliding with boundaries
-        # for i in range(0, self.WINDOW_WIDTH + 1):
-        #     for j in range(0, self.WINDOW_HEIGHT + 1):
-                
-        #         if i == 0 or i == self.WINDOW_WIDTH:
-        #             print(f"({i},{j})")
-                    
-        #         elif j == 0 or j == self.WINDOW_HEIGHT:
-        #             print(f"({i},{j})")
-        
-            
+                                        
     def display_score(self):
         font = pygame.font.SysFont("arial", 30)
         score = font.render(f"Score: {self.snake.length}", True, (200, 200, 200))
