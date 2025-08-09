@@ -1,10 +1,10 @@
 import pygame
-import os
 import random
+from .Object import Object
 
-class Apple:
+class Apple(Object):
     def __init__(self, parent_screen):
-        self.SIZE = int(os.getenv("SNAKE_SIZE", 40))
+        super().__init__()
         self.image = pygame.image.load("resources/images/apple.jpg")
         self.parent_screen = parent_screen
         self.x = self.SIZE * 3
@@ -15,5 +15,5 @@ class Apple:
         pygame.display.flip()
         
     def move(self):
-        self.x = random.randint(0, 24) * self.SIZE
-        self.y = random.randint(0, 19) * self.SIZE
+        self.x = random.randint(0, self.WINDOW_WIDTH / self.SIZE - 1) * self.SIZE
+        self.y = random.randint(0, self.WINDOW_HEIGHT / self.SIZE - 1) * self.SIZE

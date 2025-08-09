@@ -1,22 +1,20 @@
 import pygame
 import time
-import os
 from pygame.locals import *
 from .Snake import Snake
 from .Apple import Apple
+from .Object import Object
 
-class Game:
+class Game(Object):
     def __init__(self):
-        self.SIZE = int(os.getenv("SNAKE_SIZE", 40))
-        self.BACKGROUND_COLOR = eval(os.getenv("BACKGROUND_COLOR","(110, 110, 50)"))
-        
+        super().__init__()
         pygame.init()
         pygame.display.set_caption("Snake and Apple Game")
         
         pygame.mixer.init()
         self.play_background_music()
         
-        self.surface = pygame.display.set_mode((1000, 800))
+        self.surface = pygame.display.set_mode((self.WINDOW_WIDTH, self.WINDOW_HEIGHT))
         self.surface.fill(self.BACKGROUND_COLOR)
         self.snake = Snake(self.surface, 1)
         self.snake.draw()
@@ -42,10 +40,21 @@ class Game:
                 self.play_sound("crash")
                 raise "Game over"
             
+        # snake colliding with boundaries
+        # for i in range(0, self.WINDOW_WIDTH + 1):
+        #     for j in range(0, self.WINDOW_HEIGHT + 1):
+                
+        #         if i == 0 or i == self.WINDOW_WIDTH:
+        #             print(f"({i},{j})")
+                    
+        #         elif j == 0 or j == self.WINDOW_HEIGHT:
+        #             print(f"({i},{j})")
+        
+            
     def display_score(self):
         font = pygame.font.SysFont("arial", 30)
         score = font.render(f"Score: {self.snake.length}", True, (200, 200, 200))
-        self.surface.blit(score, (800, 10))
+        self.surface.blit(score, (self.WINDOW_WIDTH * 0.8, self.WINDOW_HEIGHT * 0.0125))
         
     def is_collision(self, x1, y1, x2, y2):
         if x1 >= x2 and x1 <= x2 + self.SIZE:
@@ -69,9 +78,9 @@ class Game:
         self.render_background()
         font = pygame.font.SysFont("arial", 30)
         line1 = font.render(f"Game is over! Your score is {self.snake.length}", True, (255, 255, 255))
-        self.surface.blit(line1, (200, 300))
+        self.surface.blit(line1, (self.WINDOW_WIDTH * 0.2, self.WINDOW_HEIGHT * 0.375))
         line2 = font.render("To play again press Enter. To exit press Escape!", True, (255, 255, 255))
-        self.surface.blit(line2, (200, 350))
+        self.surface.blit(line2, (self.WINDOW_WIDTH * 0.2, self.WINDOW_HEIGHT * 7 / 16))
         
         pygame.display.flip()
         pygame.mixer.music.pause()
@@ -120,4 +129,4 @@ class Game:
                 pause = True
                 self.reset()
                    
-            time.sleep(0.3)
+            time.sleep(self.SPEED)

@@ -1,9 +1,9 @@
 import pygame
-import os
+from .Object import Object
 
-class Snake:
+class Snake(Object):
     def __init__(self, parent_screen, length):
-        self.SIZE = int(os.getenv("SNAKE_SIZE", 40))
+        super().__init__()
         self.parent_screen = parent_screen
         self.length = length
         self.block = pygame.image.load("resources/images/block.jpg").convert()
