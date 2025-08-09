@@ -40,6 +40,9 @@ You can configure game settings using a `.env` file in the project root. An exam
 ```
 SNAKE_SIZE=40
 BACKGROUND_COLOR=(110, 110, 50)
+SPEED=0.5
+WINDOW_WIDTH=1000
+WINDOW_HEIGHT=800
 ```
 
 Add or modify variables as needed for your game.
@@ -66,10 +69,12 @@ resources/
   images/          # Game images (apple, background, block)
   sounds/          # Sound effects and music
 requirements.txt   # Python dependencies
+.env.example       # Example environment variables
 README.md          # Project documentation
 ```
 
 ## Controls
 
 - Arrow keys: Move the snake
+- Enter: Restart after game over
 - Esc: Quit the game
